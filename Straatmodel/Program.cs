@@ -9,7 +9,12 @@ namespace Straatmodel
         {
             Console.WriteLine("Hello World!");
 
-            Stratenmaker.MaakStraten();
+            var provincies = DictionaryOpvuller.geefStratenDictionary();
+
+            provincies["Oost-Vlaanderen"]["Gent"][0].Graaf.ShowGraaf();
+            provincies["Oost-Vlaanderen"]["Gent"][1].Graaf.ShowGraaf();
+            provincies["Oost-Vlaanderen"]["Gent"][2].Graaf.ShowGraaf();
+
 
 
         }
@@ -19,4 +24,4 @@ namespace Straatmodel
 
 //Algemene vragen: geef je je dictionaries en andere gegevens zoals straatnaamIDStraatnaam het beste door via de main? 
 //Kan je met het unzippen best je path als parameter doorgeven voor de herbruikbaarheid, of beter niet? 
-//Hoe ID's aanmaken??
+//Beste om alle lijsten door te geven via de main? 

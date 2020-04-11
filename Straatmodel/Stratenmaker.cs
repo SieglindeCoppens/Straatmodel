@@ -8,13 +8,13 @@ namespace Straatmodel
     {
         public static List<Straat> MaakStraten()
         {
-            Dictionary<int, string> straatnaamIDStraatnaam = GegevensLezer.LeesStraten();
-            Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer.LeesSegmenten();
+            Dictionary<int, string> straatnaamIDStraatnaam = GegevensLezer_segmenten.LeesStraten();
+            Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer_segmenten.LeesSegmenten();
             List<Straat> straten = new List<Straat>();
 
             foreach (KeyValuePair<int, List<Segment>> straatnaamIDSegment in straatnaamIDSegmentlijst)
             {
-                int straatID = IDGenerator.CreateStraatID();
+                int straatID = straatnaamIDSegment.Key;
                 string straatnaam = straatnaamIDStraatnaam[straatnaamIDSegment.Key];
                 Graaf graaf = new Graaf(straatnaamIDSegment.Value);
 

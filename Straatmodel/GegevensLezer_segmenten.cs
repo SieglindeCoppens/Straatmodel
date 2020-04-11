@@ -5,7 +5,9 @@ using System.IO;
 
 namespace Straatmodel
 {
-    public class GegevensLezer
+    /*Bevat alle lezers voor bestanden die informatie over straten bevat:
+       * WRstraatnamen.csv, WRdata.csv*/
+    public class GegevensLezer_segmenten
     {
         public static Dictionary<int, string> LeesStraten()
         {
@@ -24,7 +26,7 @@ namespace Straatmodel
             }
             return straatnaamIDStraatnaam;
         }
-        //WRData10 nog vervangen door WRData!! 
+        
         public static Dictionary<int, List<Segment>> LeesSegmenten()
         {
             Unzipper.UnzipData();

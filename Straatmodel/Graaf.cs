@@ -31,19 +31,22 @@ namespace Straatmodel
                 Map[segment.EindKnoop].Add(segment);
             }
         }
+        
         public void ShowGraaf()
         {
-            Console.WriteLine("**************************");
-            Console.WriteLine($"Graag met ID {this.GraafID} heeft de knopen:");
+            Console.WriteLine("\n**************************************************************************************************");
+            Console.WriteLine($"Graaf met ID {this.GraafID} heeft de knopen:");
             foreach(KeyValuePair<Knoop, List<Segment>> knoopMetSegmenten in this.Map)
             {
-                Console.WriteLine(knoopMetSegmenten.Key);
+                Console.WriteLine($"Knoop: {knoopMetSegmenten.Key} met segmenten: ");
 
                 foreach(Segment segment in knoopMetSegmenten.Value)
                 {
-                    Console.WriteLine(segment);
+                    Console.Write($"-   {segment} \n");
                 }
+     
             }
+           
         }
 
         public List<Knoop> GetKnopen()

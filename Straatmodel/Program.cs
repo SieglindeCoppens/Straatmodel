@@ -9,9 +9,22 @@ namespace Straatmodel
         {
             Console.WriteLine("Hello World!");
 
-            var provincies = DictionaryOpvuller.geefStratenDictionary();
+            //Lees de bestanden in van de straten 
+            Dictionary<int, string> straatnaamIDStraatnaam = GegevensLezer_segmenten.LeesStraten();
+            Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer_segmenten.LeesSegmenten();
 
-            provincies["Oost-Vlaanderen"]["Gent"][0].Graaf.ShowGraaf();
+            //We maken met deze gegevens een lijst van Straat objecten aan 
+            List<Straat> straten = Stratenmaker.MaakStraten(straatnaamIDStraatnaam, straatnaamIDSegmentlijst);
+
+            //Lees de bestanden in van gemeentes/provincies
+            Dictionary<string, string> gemeenteIDProvincie = GegevensLezer_adressen.LeesProvincies();
+            Dictionary<string, string> gemeentes = GegevensLezer_adressen.LeesGemeentes();
+            Dictionary<string, string> stratenIDgemeentesID = GegevensLezer_adressen.LeesLink();
+
+            //Vul een dictionary op met gecombineerde gegevens provincies, gemeentes,straten 
+            var provincies = DictionaryOpvuller.geefStratenDictionary(straten, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
+
+            provincies["Oost-Vlaanderen"]["Gent"][0].Graaf.Map;
             provincies["Oost-Vlaanderen"]["Gent"][1].Graaf.ShowGraaf();
             provincies["Oost-Vlaanderen"]["Gent"][2].Graaf.ShowGraaf();
 

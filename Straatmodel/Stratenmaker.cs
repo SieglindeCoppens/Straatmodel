@@ -6,10 +6,8 @@ namespace Straatmodel
 {
     public static class Stratenmaker
     {
-        public static List<Straat> MaakStraten()
+        public static List<Straat> MaakStraten(Dictionary<int, string> straatnaamIDStraatnaam, Dictionary<int, List<Segment>> straatnaamIDSegmentlijst)
         {
-            Dictionary<int, string> straatnaamIDStraatnaam = GegevensLezer_segmenten.LeesStraten();
-            Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer_segmenten.LeesSegmenten();
             List<Straat> straten = new List<Straat>();
 
             foreach (KeyValuePair<int, List<Segment>> straatnaamIDSegment in straatnaamIDSegmentlijst)

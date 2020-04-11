@@ -4,24 +4,13 @@ using System.Text;
 
 namespace Straatmodel
 {
+    /*Overloopt alle straten en vult zo een Dictionary met vorm <provincienaam, <gemeentenaam, List<Straat>>> op*/
     class DictionaryOpvuller
     {
-        //<provincienaam, <gemeentenaam, List<Straat>>>
-        //DOORGEVEN GEGEVENS VIA MAIN VIA PARAMETERS??
-        public static Dictionary<string, Dictionary<string, List<Straat>>> geefStratenDictionary()
+        public static Dictionary<string, Dictionary<string, List<Straat>>> geefStratenDictionary(List<Straat> straten, Dictionary<string, string> gemeenteIDProvincie, Dictionary<string, string> gemeentes, Dictionary<string, string> stratenIDgemeentesID)
         {
             Dictionary<string, Dictionary<string, List<Straat>>> provincies = new Dictionary<string, Dictionary<string, List<Straat>>>();
 
-            List<Straat> straten = Stratenmaker.MaakStraten();
-
-            //Provinciesinlezen (gemeenteID, provincienaam)
-            Dictionary<string, string> gemeenteIDProvincie = GegevensLezer_adressen.LeesProvincies();
-
-            //Gemeentes inlezen (ID als key, naam als value)
-            Dictionary<string, string> gemeentes = GegevensLezer_adressen.LeesGemeentes();
-
-            //key straatID en value gemeenteID
-            Dictionary<string, string> stratenIDgemeentesID = GegevensLezer_adressen.LeesLink();
 
             //Dictionary opvullen met gemeentenamen als key en een lijst van straten als value
             Dictionary<string, List<Straat>> gemeentesMetStraten = new Dictionary<string, List<Straat>>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace Straatmodel
+namespace Tool1_BestandSchrijven
 {
     /*Bevat alle lezers voor bestanden die informatie over straten bevat:
        * WRstraatnamen.csv, WRdata.csv*/

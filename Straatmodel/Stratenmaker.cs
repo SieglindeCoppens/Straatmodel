@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Straatmodel
+namespace Tool1_BestandSchrijven
 {
     public static class Stratenmaker
     {

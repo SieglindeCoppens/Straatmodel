@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Straatmodel
+namespace Tool1_BestandSchrijven
 {
     /*Overloopt alle straten en vult zo een Dictionary met vorm <provincienaam, <gemeentenaam, List<Straat>>> op*/
     class DictionaryOpvuller

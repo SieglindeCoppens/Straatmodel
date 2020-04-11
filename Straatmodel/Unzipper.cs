@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.IO;
 using System.Text;
 
-namespace Straatmodel
+namespace Tool1_BestandSchrijven
 {
     class Unzipper
     {

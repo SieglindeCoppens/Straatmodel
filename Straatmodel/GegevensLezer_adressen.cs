@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Straatmodel
+namespace Tool1_BestandSchrijven
 {
     class GegevensLezer_adressen
     {

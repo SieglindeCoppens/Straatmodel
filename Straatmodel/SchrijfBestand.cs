@@ -12,7 +12,9 @@ namespace Tool1_BestandSchrijven
         {
             if (File.Exists(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt") && File.Exists(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt") && File.Exists(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Knopen.txt"))
             {
-
+                File.Delete(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt");
+                File.Delete(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt");
+                File.Delete(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Knopen.txt");
             }
 
 

@@ -33,7 +33,7 @@ namespace Tool1_BestandSchrijven
             using StreamWriter writer = File.CreateText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt");
             using StreamWriter writer2 = File.CreateText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt");
             using StreamWriter writer3 = File.CreateText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Knopen.txt");
-            writer.WriteLine("StraatID;Straatnaam;Gemeente;Provincie;GraafID");
+            writer.WriteLine("StraatID;Straatnaam;Gemeente;Provincie;GraafID;Lengte");
             writer2.WriteLine("SegmentID;BeginknoopID;EindknoopID;straatID;puntenlijst");
             writer3.WriteLine("KnoopID;X;Y");
             foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
@@ -42,7 +42,7 @@ namespace Tool1_BestandSchrijven
                 {
                     foreach(Straat straat in gemeente.Value)
                     {
-                        writer.WriteLine($"{straat.StraatID};{straat.Straatnaam.Trim()};{gemeente.Key};{provincie.Key};{straat.Graaf.GraafID};{straat.BerekenLengte()}");
+                        writer.WriteLine($"{straat.StraatID};{straat.Straatnaam.Trim()};{gemeente.Key};{provincie.Key};{straat.Graaf.GraafID};{straat.Lengte}");
 
                         Dictionary<Knoop, List<Segment>> map = straat.Graaf.Map;
 
@@ -62,10 +62,11 @@ namespace Tool1_BestandSchrijven
                                     string punten = "";
                                     List<Punt> puntenlijst = segment.Vertices;
 
-                                    for (int i = 0; i < puntenlijst.Count; i++)
+                                    //De eerste en laatste waarde van de vertices knip ik er hier af, die zitten al in mijn tekstbestand van begin en eindknoop!!
+                                    for (int i = 1; i < puntenlijst.Count-1; i++)
                                     {
                                         //Deze if zodat er enkel tussen de 
-                                        if (!(i == segment.Vertices.Count - 1))
+                                        if (!(i == segment.Vertices.Count -2))
                                             punten += $"{puntenlijst[i].X} {puntenlijst[i].Y},";
                                         else
                                             punten += $"{puntenlijst[i].X} {puntenlijst[i].Y}";

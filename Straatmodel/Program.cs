@@ -25,24 +25,12 @@ namespace Tool1_BestandSchrijven
             //Vul een dictionary op met gecombineerde gegevens provincies, gemeentes,straten 
             Dictionary<string, Dictionary<string, List<Straat>>> provincies = DictionaryOpvuller.geefStratenDictionary(straten, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
 
-            int stratenteller = 0;
-            foreach(KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
-            {
-                foreach(KeyValuePair<string, List<Straat>> gemeente in provincie.Value)
-                {
-                    foreach(Straat straat in gemeente.Value)
-                    {
-                        stratenteller++;
-                    }
-                }
 
-            }
-            Console.WriteLine(stratenteller);
-
-
+            //Rapport uitprinten
+            SchrijfRapport.PrintRapport(provincies);
 
             //Bestanden uitprinten 
-            SchrijfBestand.PrintDocumenten(provincies);
+            //SchrijfBestand.PrintDocumenten(provincies);
 
 
 

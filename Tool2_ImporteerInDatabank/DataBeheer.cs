@@ -64,33 +64,62 @@ namespace Tool2_ImporteerInDatabank
                 
             }
         }
+
+        //NOG EEN TRANSACTIE VAN MAKEN!!
         public void VoegSegmentenToe(List<List<string>> segmentInfo)
         {
             SqlConnection connection = getConnection();
-            string query = "INSERT INTO dbo.segment(id, beginknoop, eindknoop, straatId, puntenlijst) VALUES(@id, @beginknoop, @eindknoop, @straatId, @puntenlijst)";
+            string query = "INSERT INTO dbo.segment(id, beginknoop, eindknoop, straatId) VALUES(@id, @beginknoop, @eindknoop, @straatId)";
+            string query2 = "INSERT INTO dbo.punt(x, y, segmentId, positie) VALUES(@x, @y, @segmentId, @positie)";
             using (SqlCommand command = connection.CreateCommand())
+            using( SqlCommand command2 = connection.CreateCommand())
             {
                 connection.Open();
                 //foreach uit try of in try? 
 
-
                 try
                 {
+                    //Invoegen in segment
                     command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                     command.Parameters.Add(new SqlParameter("@beginknoop", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@eindknoop", SqlDbType.NVarChar));
                     command.Parameters.Add(new SqlParameter("@straatId", SqlDbType.Int));
-                    command.Parameters.Add(new SqlParameter("@puntenlijst", SqlDbType.NVarChar));
                     command.CommandText = query;
+
+                    //Invoegen in punt
+                    command2.Parameters.Add(new SqlParameter("@x", SqlDbType.NVarChar));
+                    command2.Parameters.Add(new SqlParameter("@y", SqlDbType.NVarChar));
+                    command2.Parameters.Add(new SqlParameter("@segmentId", SqlDbType.Int));
+                    command2.Parameters.Add(new SqlParameter("@positie", SqlDbType.Int));
+                    command2.CommandText = query2;
+
+
                     for (int i = 0; i < segmentInfo[0].Count; i++)
                     {
-                        
+                        //segment
                         command.Parameters["@id"].Value = int.Parse(segmentInfo[0][i]);
                         command.Parameters["@beginknoop"].Value = int.Parse(segmentInfo[1][i]);
                         command.Parameters["@eindknoop"].Value = int.Parse(segmentInfo[2][i]);
                         command.Parameters["@straatId"].Value = int.Parse(segmentInfo[3][i]);
-                        command.Parameters["@puntenlijst"].Value = segmentInfo[4][i];
                         command.ExecuteNonQuery();
+
+                        //punt
+                        command2.Parameters["@segmentId"].Value = int.Parse(segmentInfo[0][i]);
+
+                        if (!(segmentInfo[4][i] == ""))
+                        {
+                            string[] punten = segmentInfo[4][i].Split(',');
+                            for (int x = 0; x < punten.Length; x++)
+                            {
+                                string[] xy = punten[x].Split(" ");
+                                command2.Parameters["@x"].Value = xy[0];
+                                command2.Parameters["@y"].Value = xy[1];
+                                //volgorde van de punten behouden? Voor moest je nog berekening van lengte willen doen (ookal geef ik de lengte gewoon ook door)
+                                command2.Parameters["@positie"].Value = x+1;
+                                command2.ExecuteNonQuery();
+                            }
+                        }
+                       
                     }
 
                 }

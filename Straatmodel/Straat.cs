@@ -4,17 +4,20 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    public class Straat
+    public class Straat : IComparable, IComparable<Straat>
     {
         public Graaf Graaf { get; set; }
         public int StraatID { get; set; }
         public string Straatnaam { get; set; }
+
+        public double Lengte { get; set; }
 
         public Straat(int straatID, string straatnaam, Graaf graaf)
         {
             StraatID = straatID;
             Straatnaam = straatnaam;
             Graaf = graaf;
+            Lengte = this.BerekenLengte();
 
         }
 
@@ -57,11 +60,27 @@ namespace Tool1_BestandSchrijven
         {
             return Graaf.GetKnopen();
         }
+
+
+        //NOG TE IMPLEMENTEREN!
         public void showStraat()
         {
 
         }
 
-
+        int IComparable.CompareTo(object Straat)
+        {
+            if (Straat is Straat)
+                return CompareTo(Straat as Straat);
+            else
+                throw new ArgumentException($"Object must be of type {nameof(Straat)}.");
+        }
+        public int CompareTo(Straat straat)
+        {
+            if (!ReferenceEquals(straat, null))
+                return Lengte.CompareTo(straat.Lengte);
+            else
+                return +1;
+        }
     }
 }

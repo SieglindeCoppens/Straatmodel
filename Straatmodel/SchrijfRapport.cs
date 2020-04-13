@@ -47,7 +47,7 @@ namespace Tool1_BestandSchrijven
 
                     
                     straten.Sort();
-
+                    //kon ook met LINQ
                     Straat kortste = straten[0];
                     Straat langste = straten[straten.Count - 1];
 

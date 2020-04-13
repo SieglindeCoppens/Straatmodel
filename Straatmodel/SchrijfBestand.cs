@@ -42,7 +42,7 @@ namespace Tool1_BestandSchrijven
                 {
                     foreach(Straat straat in gemeente.Value)
                     {
-                        writer.WriteLine($"{straat.StraatID};{straat.Straatnaam.Trim()};{gemeente.Key};{provincie.Key};{straat.Graaf.GraafID}");
+                        writer.WriteLine($"{straat.StraatID};{straat.Straatnaam.Trim()};{gemeente.Key};{provincie.Key};{straat.Graaf.GraafID};{straat.BerekenLengte()}");
 
                         Dictionary<Knoop, List<Segment>> map = straat.Graaf.Map;
 
@@ -72,7 +72,9 @@ namespace Tool1_BestandSchrijven
 
                                     }
                                     writer2.WriteLine($"{segment.SegmentID};{segment.BeginKnoop.KnoopID};{segment.EindKnoop.KnoopID};{straat.StraatID};{punten}");
+                                    uitgeprinteSegmentenID.Add(segment.SegmentID);
                                 }
+
                             }
                         }
                     }

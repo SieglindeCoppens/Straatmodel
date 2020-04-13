@@ -15,6 +15,7 @@ namespace Tool2_ImporteerInDatabank
             List<string> gemeentes = new List<string>();
             List<string> provincies = new List<string>();
             List<string> graafIds = new List<string>();
+            List<string> lengtes = new List<string>();
 
             using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt"))
             {
@@ -28,6 +29,7 @@ namespace Tool2_ImporteerInDatabank
                     gemeentes.Add(inputs[2]);
                     provincies.Add(inputs[3]);
                     graafIds.Add(inputs[4]);
+                    lengtes.Add(inputs[5]);
                 }
             }
             straatInfo.Add(straatIds);
@@ -35,6 +37,7 @@ namespace Tool2_ImporteerInDatabank
             straatInfo.Add(gemeentes);
             straatInfo.Add(provincies);
             straatInfo.Add(graafIds);
+            straatInfo.Add(lengtes);
 
             return straatInfo;
         }
@@ -48,7 +51,7 @@ namespace Tool2_ImporteerInDatabank
             List<string> straatIds = new List<string>();
             List<string> puntenlijsten = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt"))
+            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt"))
             {
                 string input = null;
                 sr.ReadLine();

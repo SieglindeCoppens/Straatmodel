@@ -50,7 +50,7 @@ namespace Tool1_BestandSchrijven
                     }
                 }
             }
-            return totaleLengte;
+            return Math.Round(totaleLengte,4);
         }
 
         public List<Knoop> getKnopen() 

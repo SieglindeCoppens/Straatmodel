@@ -39,8 +39,10 @@ namespace Tool1_BestandSchrijven
             }
             Console.WriteLine(stratenteller);
 
+
+
             //Bestanden uitprinten 
-            //SchrijfBestand.PrintDocumenten(provincies);
+            SchrijfBestand.PrintDocumenten(provincies);
 
 
 

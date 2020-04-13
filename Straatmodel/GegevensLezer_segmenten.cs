@@ -78,7 +78,7 @@ namespace Tool1_BestandSchrijven
                         }
 
                         int straatID2 = int.Parse(inputs[7]);
-                        if (!(straatID2 == -9))
+                        if (!(straatID2 == -9) &&(straatID2!=straatID))
                         {
                             if (straatIDSegmentlijst.ContainsKey(straatID2))                                     //als er al een record in de dictionary zit voor de straat
                             {

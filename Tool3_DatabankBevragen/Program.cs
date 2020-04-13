@@ -22,6 +22,7 @@ namespace Tool3_DatabankBevragen
 
             switch (keuze)
             {
+                //Alles laten printen naar de console in de aparte klassen? 
                 case 1:
                     Console.WriteLine("Van welke gemeente wenst u de straatID's op te vragen?");
                     string gemeente = Console.ReadLine();
@@ -34,7 +35,10 @@ namespace Tool3_DatabankBevragen
 
                     break;
                 case 2:
-                    Console.WriteLine("Van welke straatID wenst u de straatinfo? ");
+                    Console.WriteLine("Van welke straatID wenst u de straatinfo? (geef straatID) ");
+                    int straatId = int.Parse(Console.ReadLine());
+                    
+
                     break;
                 case 3:
                     break;

@@ -11,7 +11,7 @@ namespace Tool1_BestandSchrijven
             int teller = 0;
             foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
             {
-                TelStraten(provincie.Value);
+                teller += TelStraten(provincie.Value);
 
             }
             return teller;

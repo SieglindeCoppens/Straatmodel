@@ -34,13 +34,13 @@ namespace Tool1_BestandSchrijven
                 foreach(KeyValuePair<string, List<Straat>> gemeente in provincie.Value)
                 {
                     List<Straat> straten = gemeente.Value;
+                    double totaleLengte = 0;
                     foreach (Straat straat in straten)
                     {
-
+                        totaleLengte += straat.Lengte;
                     }
 
-
-                    writer.WriteLine($"{gemeente.Key} : {gemeente.Value.Count}, {}");
+                    writer.WriteLine($"   -  {gemeente.Key} : {gemeente.Value.Count}, {totaleLengte}");
                     //var gesorteerdestraten = from Straat straat in gemeente.Value
                     //                         orderby straat.Lengte
                     //                         select straat;
@@ -48,8 +48,11 @@ namespace Tool1_BestandSchrijven
                     
                     straten.Sort();
 
-                    Straat langste = straten[0];
-                    Straat kortste = straten[straten.Count - 1];
+                    Straat kortste = straten[0];
+                    Straat langste = straten[straten.Count - 1];
+
+                    writer.WriteLine($"         o  {kortste.StraatID}, {kortste.Straatnaam}, {kortste.Lengte}");
+                    writer.WriteLine($"         o  {langste.StraatID}, {langste.Straatnaam}, {langste.Lengte}");
 
                 }
 

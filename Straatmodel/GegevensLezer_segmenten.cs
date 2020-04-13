@@ -21,7 +21,7 @@ namespace Tool1_BestandSchrijven
                 while ((input = sr.ReadLine()) != null)
                 {
                     string[] inputs = input.Split(';');
-                    straatnaamIDStraatnaam.Add(int.Parse(inputs[0]), inputs[1]);
+                    straatnaamIDStraatnaam.Add(int.Parse(inputs[0]), inputs[1].Trim());
                 }
             }
             return straatnaamIDStraatnaam;

@@ -43,9 +43,9 @@ namespace Tool2_ImporteerInDatabank
                     for (int i=0;i<stratenInfo[0].Count;i++)
                         {
                             command.Parameters["@id"].Value = int.Parse(stratenInfo[0][i]);
-                            command.Parameters["@straatnaam"].Value = stratenInfo[1][i];
-                            command.Parameters["@gemeente"].Value = stratenInfo[2][i];
-                            command.Parameters["@provincie"].Value = stratenInfo[3][i];
+                            command.Parameters["@straatnaam"].Value = stratenInfo[1][i].ToLower();
+                            command.Parameters["@gemeente"].Value = stratenInfo[2][i].ToLower();
+                            command.Parameters["@provincie"].Value = stratenInfo[3][i].ToLower();
                             command.Parameters["@graafId"].Value = int.Parse(stratenInfo[4][i]);
                             command.Parameters["@lengte"].Value = stratenInfo[5][i];
                             command.ExecuteNonQuery();

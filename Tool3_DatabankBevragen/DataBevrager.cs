@@ -68,6 +68,18 @@ namespace Tool3_DatabankBevragen
         public void GeefStraatinfo(int straatID)
         {
             List<int> knopen = GeefKnopenVanStraat(straatID);
+            SqlConnection connection = getConnection();
+            Dictionary<int, List<int>> knoopMetSegmenten = new Dictionary<int, List<int>>();
+
+            string querySegmenten = "SELECT se.id AS seid FROM dbo.knoop k INNER JOIN dbo.segment se ON se.beginknoop = k.id INNER JOIN dbo.punt p ON p.segmentId = se.id";
+
+
+
+            foreach(int knoop in knopen)
+            {
+
+            }
+
 
 
         }
@@ -127,5 +139,22 @@ namespace Tool3_DatabankBevragen
             IEnumerable<int> distinctKnoopIDs = knoopIDs.Distinct();
             return distinctKnoopIDs.ToList();
         }
+
+        public List<string> GeefStraatnamenVanGemeente(string gemeente)
+        {
+            List<string> straatnamen = new List<string>();
+
+
+
+
+
+
+
+
+
+            return straatnamen;
+        }
+
+
     }
 }

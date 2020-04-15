@@ -41,6 +41,10 @@ namespace Tool3_DatabankBevragen
 
                     break;
                 case 3:
+                    Console.WriteLine("Geef de straatnaam:");
+                    string straatnaam = Console.ReadLine();
+                    Console.WriteLine("Geef de gemeentenaam:");
+                    string gemeentenaam = Console.ReadLine();
                     break;
                 case 4:
                     break;

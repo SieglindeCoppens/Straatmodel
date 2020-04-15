@@ -106,7 +106,7 @@ namespace Tool2_ImporteerInDatabank
                         //punt
                         command2.Parameters["@segmentId"].Value = int.Parse(segmentInfo[0][i]);
 
-                        if (!(segmentInfo[4][i] == ""))
+                        if (!(segmentInfo[4][i].Trim(' ') == ""))
                         {
                             string[] punten = segmentInfo[4][i].Split(',');
                             for (int x = 0; x < punten.Length; x++)

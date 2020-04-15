@@ -9,8 +9,11 @@ namespace Tool3_DatabankBevragen
         {
             Console.WriteLine("Hello World!");
 
+
             DataBevrager db = new DataBevrager("Data Source=DESKTOP-HT91N8R\\SQLEXPRESS;Initial Catalog=db_Wegennet;Integrated Security=True");
-            
+
+
+            db.GeefStraatinfo(120383);
 
             Console.WriteLine("Wat wenst u te doen (Typ het nummer)?");
             Console.WriteLine("1. Lijst van straatID's van een gemeente opvragen");
@@ -31,13 +34,16 @@ namespace Tool3_DatabankBevragen
                     {
                         Console.WriteLine(straatID);
                     }
-
-
                     break;
+
                 case 2:
                     Console.WriteLine("Van welke straatID wenst u de straatinfo? (geef straatID) ");
                     int straatId = int.Parse(Console.ReadLine());
-                    
+                    var knopen = db.GeefKnopenVanStraat(32068);
+
+
+                    List<string> info = db.GeefStraatStringEnAantalSegmenten(32068);
+                    Console.WriteLine();
 
                     break;
                 case 3:
@@ -47,6 +53,14 @@ namespace Tool3_DatabankBevragen
                     string gemeentenaam = Console.ReadLine();
                     break;
                 case 4:
+                    Console.WriteLine("Geef de gemeentenaam:");
+                    string gemeentenaam2 = Console.ReadLine();
+                    List<string> straatnamen = db.GeefStraatnamenVanGemeente(gemeentenaam2);
+                    foreach(string straatnaam2 in straatnamen)
+                    {
+                        Console.WriteLine(straatnaam2);
+                    }
+
                     break;
             }
         }

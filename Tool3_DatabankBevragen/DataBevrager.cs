@@ -62,26 +62,45 @@ namespace Tool3_DatabankBevragen
             return straatIDs;
         }
 
-        //Probeersel: welke van de twee is sneller? 
-        public void GeefStraatInfo2(int straatID)
-        {
-            string query = "SELECT st.straatnaam, st.id, st.gemeente, st.provincie, st.graafId, k.id, k.x, k.y, se.id, se.beginknoop, se.eindknoop, p.id, p.x, p.y  " +
-                "FROM dbo.straat st INNER JOIN dbo.segment se ON st.id = se.straatId " +
-                "INNER JOIN dbo.knoop k ON se.beginknoop = k.id " +
-                "LEFT JOIN dbo.punt p ON p.segmentId = se.id " +
-                "WHERE st.id = @id" +
-                "UNION " +
-                "SELECT st.straatnaam, st.id, st.gemeente, st.provincie, st.graafId, k.id, k.x, k.y, se.id, se.beginknoop, se.eindknoop, p.id, p.x, p.y " +
-                "FROM dbo.straat st INNER JOIN dbo.segment se ON st.id = se.straatId " +
-                "INNER JOIN dbo.knoop k ON se.eindknoop = k.id " +
-                "LEFT JOIN dbo.punt p ON p.segmentId = se.id " +
-                "WHERE st.id = @id"; 
-        }
-
-
         //Aantal knopen tellen?? IS DIT EFFICIENT??
         //string queryKnopen = "SELECT DISTINCT k.id FROM dbo.straat st INNER JOIN dbo.segment se ON st.id=se.straatId INNER JOIN dbo.knoop k ON se.beginknoop = k.id WHERE st.id=@id UNION SELECT DISTINCT k.id FROM dbo.straat st INNER JOIN dbo.segment se ON st.id = se.straatId INNER JOIN dbo.knoop k ON se.eindknoop = k.id WHERE st.id =@id";
         //Aparte geefknopenlijst? 
+
+
+        public void GeefStraatinfo(string gemeente, string straatnaam)
+        {
+            SqlConnection connection = getConnection();
+            string query = "SELECT id FROM dbo.straat WHERE straatnaam=@straatnaam AND gemeente=@gemeente";
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = query;
+                command.Parameters.Add(new SqlParameter("@straatnaam", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@gemeente", SqlDbType.NVarChar));
+                connection.Open();
+                try
+                {
+                    command.Parameters["@straatnaam"].Value = straatnaam;
+                    command.Parameters["@gemeente"].Value = gemeente;
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    dataReader.Read();
+                    int straatId = (int)dataReader["id"];
+                    dataReader.Close();
+                    GeefStraatinfo(straatId);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                
+            }
+
+
+        }
         public void GeefStraatinfo(int straatID)
         {
             List<string> straatGegevens = GeefStraatStringEnAantalSegmenten(straatID);
@@ -262,48 +281,6 @@ namespace Tool3_DatabankBevragen
             return straatnamen;
         }
 
-        //public List<int> GeefSegmentenVanKnoop(int knoopId)
-        //{
-        //    SqlConnection connection = getConnection();
-        //    List<int> segmentIds = new List<int>();
-
-        //    string query = "SELECT se.id AS seid  FROM dbo.knoop k INNER JOIN dbo.segment se ON se.beginknoop=k.id WHERE k.id=@kid " +
-        //        "UNION " +
-        //        "SELECT se.id AS seid FROM dbo.knoop k INNER JOIN dbo.segment se ON se.eindknoop = k.id WHERE k.id =@kid";
-
-        //    using (SqlCommand command = connection.CreateCommand())
-        //    {
-        //        command.CommandText = query;
-        //        SqlParameter parKid = new SqlParameter();
-        //        parKid.ParameterName = "@kid";
-        //        parKid.SqlDbType = SqlDbType.Int;
-        //        parKid.Value = knoopId;
-        //        command.Parameters.Add(parKid);
-
-        //        connection.Open();
-        //        try
-        //        {
-        //            SqlDataReader dataReader = command.ExecuteReader();
-        //            while (dataReader.Read())
-        //            {
-        //                int segmentId = (int)dataReader["kid"];
-        //                segmentIds.Add(segmentId);
-        //            }
-        //            dataReader.Close();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine(ex);
-        //        }
-        //        finally
-        //        {
-        //            connection.Close();
-        //        }
-        //    }
-        //    return segmentIds;
-
-        //}
-
         public List<string> GeefStraatStringEnAantalSegmenten(int straatId)
         {
             SqlConnection connection = getConnection();
@@ -314,7 +291,6 @@ namespace Tool3_DatabankBevragen
             string queryAS = "SELECT COUNT(*) FROM dbo.segment WHERE straatId=@id";
 
             using (SqlCommand command = connection.CreateCommand())
-            //using (SqlCommand command2 = connection.CreateCommand())
             {
                 command.CommandText = query;
                 SqlParameter parId = new SqlParameter();
@@ -322,12 +298,6 @@ namespace Tool3_DatabankBevragen
                 parId.SqlDbType = SqlDbType.Int;
                 parId.Value = straatId;
                 command.Parameters.Add(parId);
-                //command2.CommandText = queryAS;
-                //SqlParameter parId2 = new SqlParameter();
-                //parId2.ParameterName = "@id";
-                //parId2.SqlDbType = SqlDbType.Int;
-                //parId2.Value = straatId;
-                //command2.Parameters.Add(parId2);
 
                 connection.Open();
                 try
@@ -360,12 +330,16 @@ namespace Tool3_DatabankBevragen
             }
             return straatGegevens;
         }
-
-        //private GeefAantalWegsegmenten(int straatId)
-        //{
-        //    SqlConnection connection = getConnection();
-
-
-        //}
     }
 }
+//Dit van elke knoop doen!
+//eerst knopen zoeken met deze query
+//SELECT k.id as kid, k.x, k.y FROM dbo.straat st INNER JOIN dbo.segment se ON st.id= se.straatId INNER JOIN dbo.knoop k on se.beginknoop= k.id WHERE st.id= 70207
+//UNION
+//SELECT k.id as kid, k.x, k.y FROM dbo.straat st INNER JOIN dbo.segment se ON st.id= se.straatId INNER JOIN dbo.knoop k on se.eindknoop= k.id WHERE st.id= 70207;
+
+
+//SELECT DISTINCT st.straatnaam FROM dbo.straat st INNER JOIN dbo.segment se ON se.straatId=st.id INNER JOIN dbo.knoop k ON se.beginknoop= 1356590
+//UNION
+//SELECT DISTINCT st.straatnaam FROM dbo.straat st INNER JOIN dbo.segment se ON se.straatId= st.id INNER JOIN dbo.knoop k ON se.eindknoop= 1356590
+//;

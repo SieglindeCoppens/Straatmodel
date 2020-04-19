@@ -25,20 +25,11 @@ namespace Tool1_BestandSchrijven
             //Vul een dictionary op met gecombineerde gegevens provincies, gemeentes,straten 
             Dictionary<string, Dictionary<string, List<Straat>>> provincies = DictionaryOpvuller.geefStratenDictionary(straten, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
 
-
             //Rapport uitprinten
             SchrijfRapport.PrintRapport(provincies);
 
             //Bestanden uitprinten 
-            //SchrijfBestand.PrintDocumenten(provincies);
-
-
-
+            SchrijfBestand.PrintDocumenten(provincies);
         }
     }
 }
-
-
-//Algemene vragen: geef je je dictionaries en andere gegevens zoals straatnaamIDStraatnaam het beste door via de main? 
-//Kan je met het unzippen best je path als parameter doorgeven voor de herbruikbaarheid, of beter niet? 
-//Beste om alle lijsten door te geven via de main? 

@@ -21,7 +21,7 @@ namespace Tool1_BestandSchrijven
 
         }
 
-        public double BerekenLengte()
+        private double BerekenLengte()
         {
             //Dit doen we door de afstanden tussen de vertices van elk van de segmenten te berekenen
             double totaleLengte = 0;
@@ -65,7 +65,8 @@ namespace Tool1_BestandSchrijven
         //NOG TE IMPLEMENTEREN!
         public void showStraat()
         {
-
+            Console.WriteLine("\n**************************************************************************************************");
+            Console.WriteLine($"{StraatID} : {Straatnaam} met lengte {Lengte}m");
         }
 
         int IComparable.CompareTo(object Straat)

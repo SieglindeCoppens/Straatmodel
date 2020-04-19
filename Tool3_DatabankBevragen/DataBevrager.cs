@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -96,7 +97,7 @@ namespace Tool3_DatabankBevragen
                 {
                     connection.Close();
                 }
-                
+
             }
 
 
@@ -108,8 +109,8 @@ namespace Tool3_DatabankBevragen
             Console.WriteLine(straatGegevens[3]);
 
             List<List<string>> knopen = GeefKnopenVanStraat(straatID);
-            Console.WriteLine("Aantal knopen : "+ knopen[0].Count);
-            Console.WriteLine("Aantal segmenten : "+straatGegevens[4]);
+            Console.WriteLine("Aantal knopen : " + knopen[0].Count);
+            Console.WriteLine("Aantal segmenten : " + straatGegevens[4]);
 
             //2 connecties naar de databank om de twee readers te kunnen uitvoeren??
             SqlConnection connection = getConnection();
@@ -130,13 +131,13 @@ namespace Tool3_DatabankBevragen
                 connection.Open();
                 try
                 {
-                    for(int i=0;i < knopen[0].Count;i++)
+                    for (int i = 0; i < knopen[0].Count; i++)
                     {
                         Console.WriteLine($"Knoop[{knopen[0][i]},[{knopen[1][i]},{knopen[2][i]}]]");
                         command.Parameters["@id"].Value = knopen[0][i];
                         command.Parameters["@straatID"].Value = straatID;
                         SqlDataReader reader = command.ExecuteReader();
-                        
+
 
                         while (reader.Read()) //overloopt dus de segmenten
                         {
@@ -248,7 +249,7 @@ namespace Tool3_DatabankBevragen
 
             string query = "SELECT straatnaam FROM dbo.straat WHERE gemeente=@gemeente";
 
-            using(SqlCommand command = connection.CreateCommand())
+            using (SqlCommand command = connection.CreateCommand())
             {
                 command.CommandText = query;
                 SqlParameter paramGemeente = new SqlParameter();
@@ -329,6 +330,167 @@ namespace Tool3_DatabankBevragen
                 }
             }
             return straatGegevens;
+        }
+
+        public void GeefProvincieoverzicht(string provincie)
+        {
+            List<string> gemeenten = GeefGemeentenVoorProvincie(provincie);
+
+            using StreamWriter writer = File.CreateText(@$"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\{provincie}.txt");
+
+            SqlConnection connection = getConnection();
+            string queryAantal = "SELECT COUNT(DISTINCT straatnaam) FROM dbo.straat WHERE provincie=@provincie AND gemeente=@gemeente";
+            string queryStraten = "SELECT straatnaam, lengte FROM dbo.straat WHERE provincie=@provincie AND gemeente=@gemeente ORDER BY lengte";
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    for (int i = 0; i < gemeenten.Count; i++)
+                    {
+                        command.CommandText = queryAantal;
+                        SqlParameter parGemeente = new SqlParameter();
+                        parGemeente.ParameterName = "@gemeente";
+                        parGemeente.SqlDbType = SqlDbType.NVarChar;
+                        parGemeente.Value = gemeenten[i];
+                        command.Parameters.Add(parGemeente);
+                        SqlParameter parProv = new SqlParameter();
+                        parProv.ParameterName = "@provincie";
+                        parProv.SqlDbType = SqlDbType.NVarChar;
+                        parProv.Value = provincie;
+                        command.Parameters.Add(parProv);
+
+                        int aantalstraten = (int)command.ExecuteScalar();
+
+                        writer.WriteLine($"{gemeenten[i]} : {aantalstraten}");
+
+                        command.CommandText = queryStraten;
+                        SqlDataReader dataReader = command.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string straatnaam = (string)dataReader["straatnaam"];
+                            float lengte = (float)dataReader["lengte"];
+                            writer.WriteLine($"   o   {straatnaam}, {lengte}");
+                            command.Parameters.Clear();
+                        }
+                        dataReader.Close();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        //foreach (string gemeente in gemeenten)
+        //IN DE CONNECTION? PARAMETER GEWOON AANPASSEN -> MAAR  1 connectie! 
+
+        //string query2 = "SELECT COUNT(DISTINCT gemeente) FROM dbo.straat WHERE provincie=@provincie";
+        //string aantalGemeenten = (command.ExecuteScalar().ToString()); //string??
+
+        public List<string> GeefGemeentenVoorProvincie(string provincie)
+        {
+            List<string> gemeenten = new List<string>();
+            SqlConnection connection = getConnection();
+
+            string query1 = "SELECT DISTINCT gemeente FROM dbo.straat WHERE provincie=@provincie";
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = query1;
+                SqlParameter parProv = new SqlParameter();
+                parProv.ParameterName = "@provincie";
+                parProv.SqlDbType = SqlDbType.NVarChar;
+                parProv.Value = provincie;
+                command.Parameters.Add(parProv);
+
+                connection.Open();
+                try
+                {
+                    command.CommandText = query1;
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        string gemeentenaam = (string)dataReader["gemeente"];
+                        gemeenten.Add(gemeentenaam);
+                    }
+                    dataReader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            //Ik had ook kunnen sorteren in mijn sql query, maar wou hier eens LINQ gebruiken 
+
+            gemeenten.Sort();
+            return gemeenten;
+        }
+
+        public List<string> GeefAangrenzendeStraten(int straatID)
+        {
+            List<string> aangrenzendeStraten = new List<string>();
+
+            List<List<string>> knopen = GeefKnopenVanStraat(straatID);
+            SqlConnection connection = getConnection();
+
+            string query = "SELECT DISTINCT st.straatnaam FROM dbo.straat st INNER JOIN dbo.segment se ON se.straatId=st.id INNER JOIN dbo.knoop k ON se.beginknoop=@knoopId WHERE NOT st.id=@straatId " +
+                "UNION " +
+                "SELECT DISTINCT st.straatnaam FROM dbo.straat st INNER JOIN dbo.segment se ON se.straatId= st.id INNER JOIN dbo.knoop k ON se.eindknoop=@knoopId WHERE NOT st.id=@straatId";
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = query;
+                connection.Open();
+
+                try
+                {
+                    for (int i = 0; i < knopen.Count; i++)
+                    {
+                        SqlParameter parKnoop = new SqlParameter();
+                        parKnoop.ParameterName = "@knoopId";
+                        parKnoop.SqlDbType = SqlDbType.Int;
+                        parKnoop.Value = knopen[0][i];
+                        command.Parameters.Add(parKnoop);
+                        SqlParameter parStraatId = new SqlParameter();
+                        parStraatId.ParameterName = "@straatId";
+                        parStraatId.SqlDbType = SqlDbType.Int;
+                        parStraatId.Value = straatID;
+                        command.Parameters.Add(parStraatId);
+
+                        SqlDataReader dataReader = command.ExecuteReader();
+                        while (dataReader.Read())
+                        {
+                            string straatnaam = (string)dataReader["straatnaam"];
+                            aangrenzendeStraten.Add(straatnaam);
+                        }
+                        dataReader.Close();
+                        command.Parameters.Clear();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return aangrenzendeStraten;
         }
     }
 }

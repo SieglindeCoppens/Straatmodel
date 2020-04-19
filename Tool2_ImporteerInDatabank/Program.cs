@@ -16,8 +16,8 @@ namespace Tool2_ImporteerInDatabank
 
             //IN EEN TRANSACTIE STEKEN?? ALLES LUKT OF NIETS LUKT!!
             db.voegStratenToe(stratenInfo);
-            db.VoegSegmentenToe(segmentInfo);
-            db.VoegKnopenToe(knoopInfo);
+            //db.VoegSegmentenToe(segmentInfo);
+            //db.VoegKnopenToe(knoopInfo);
 
         }
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    public class Knoop
+    class Knoop
     {
         public int KnoopID {get;set;}
         public Punt Punt{get; set;}

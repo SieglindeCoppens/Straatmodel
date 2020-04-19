@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    public class Graaf
+    class Graaf
     {
         public int GraafID { get; set; }
         public Dictionary<Knoop, List<Segment>> Map { get; set; }

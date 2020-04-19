@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    public class Straat : IComparable, IComparable<Straat>
+    class Straat : IComparable, IComparable<Straat>
     {
         public Graaf Graaf { get; set; }
         public int StraatID { get; set; }

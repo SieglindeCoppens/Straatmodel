@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tool1_BestandSchrijven
+namespace Tool3_Versie2
 {
-    public class Segment
+    class Segment
     {
         public Knoop BeginKnoop { get; set; }
         public Knoop EindKnoop { get; set; }

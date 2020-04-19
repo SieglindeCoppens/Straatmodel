@@ -22,16 +22,16 @@ namespace Tool1_BestandSchrijven
             writer.WriteLine($"Totaal aantal straten: {Stratenteller.TelStraten(provincies)}\n");
 
             writer.WriteLine("Aantal straten per provincie:");
-            foreach(KeyValuePair<string, Dictionary<string, List<Straat>>>  provincie in provincies)
+            foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
             {
                 writer.WriteLine($"   -  {provincie.Key} : {Stratenteller.TelStraten(provincie.Value)}");
             }
 
-            foreach(KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
+            foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
             {
                 writer.WriteLine($"\n Straatinfo {provincie.Key}");
 
-                foreach(KeyValuePair<string, List<Straat>> gemeente in provincie.Value)
+                foreach (KeyValuePair<string, List<Straat>> gemeente in provincie.Value)
                 {
                     List<Straat> straten = gemeente.Value;
                     double totaleLengte = 0;
@@ -45,7 +45,7 @@ namespace Tool1_BestandSchrijven
                     //                         orderby straat.Lengte
                     //                         select straat;
 
-                    
+
                     straten.Sort();
                     //kon ook met LINQ
                     Straat kortste = straten[0];
@@ -58,7 +58,7 @@ namespace Tool1_BestandSchrijven
 
             }
 
-            
+
 
 
         }

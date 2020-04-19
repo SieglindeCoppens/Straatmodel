@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tool1_BestandSchrijven.Stratenmaker;
 
 namespace Tool1_BestandSchrijven
 {
-    public static class Stratenmaker
+    class StratenFactory : IStraatFactory
     {
-        public static List<Straat> MaakStraten(Dictionary<int, string> straatnaamIDStraatnaam, Dictionary<int, List<Segment>> straatnaamIDSegmentlijst)
+        public List<Straat> MaakStraten(Dictionary<int, string> straatnaamIDStraatnaam, Dictionary<int, List<Segment>> straatnaamIDSegmentlijst)
         {
             List<Straat> straten = new List<Straat>();
 

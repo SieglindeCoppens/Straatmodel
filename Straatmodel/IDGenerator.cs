@@ -6,15 +6,15 @@ namespace Tool1_BestandSchrijven
 {
     class IDGenerator
     {
-        private static int straatID = 1;
-        private static int graafID = 1;
+        private static int StraatID = 1;
+        private static int GraafID = 1;
         public static int CreateStraatID()
         {
-            return straatID ++;
+            return StraatID++;
         }
         public static int CreateGraafID()
         {
-            return graafID++;
+            return GraafID++;
         }
     }
 }

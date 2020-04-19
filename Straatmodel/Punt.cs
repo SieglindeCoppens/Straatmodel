@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    public class Punt
+    class Punt
     {
         public double X { get;set;}
         public double Y{ get;set;}

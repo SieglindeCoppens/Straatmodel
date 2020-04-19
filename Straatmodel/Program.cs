@@ -14,7 +14,8 @@ namespace Tool1_BestandSchrijven
             Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer_segmenten.LeesSegmenten();
 
             //We maken met deze gegevens een lijst van Straat objecten aan, hierin zitten ook nog de straten in niet-Vlaanderen
-            List<Straat> straten = Stratenmaker.MaakStraten(straatnaamIDStraatnaam, straatnaamIDSegmentlijst);
+            StratenFactory sf = new StratenFactory();
+            List<Straat> straten = sf.MaakStraten(straatnaamIDStraatnaam, straatnaamIDSegmentlijst);
 
 
             //Lees de bestanden in van gemeentes/provincies

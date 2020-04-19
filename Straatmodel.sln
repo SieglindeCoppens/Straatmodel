@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool1_BestandSchrijven", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool2_ImporteerInDatabank", "Tool2_ImporteerInDatabank\Tool2_ImporteerInDatabank.csproj", "{7051A5B6-7ADA-4ED3-B95C-8716AEDDFBC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool3_DatabankBevragen", "Tool3_DatabankBevragen\Tool3_DatabankBevragen.csproj", "{1F8D72FD-185A-4562-92DE-D95AC709A369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool3_DatabankBevragen", "Tool3_DatabankBevragen\Tool3_DatabankBevragen.csproj", "{1F8D72FD-185A-4562-92DE-D95AC709A369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool3_Versie2", "Tool3_Versie2\Tool3_Versie2.csproj", "{1D49BBF0-67E2-449F-9907-DA25940069FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1F8D72FD-185A-4562-92DE-D95AC709A369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F8D72FD-185A-4562-92DE-D95AC709A369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F8D72FD-185A-4562-92DE-D95AC709A369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D49BBF0-67E2-449F-9907-DA25940069FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D49BBF0-67E2-449F-9907-DA25940069FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D49BBF0-67E2-449F-9907-DA25940069FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D49BBF0-67E2-449F-9907-DA25940069FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

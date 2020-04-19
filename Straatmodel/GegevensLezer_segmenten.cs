@@ -7,7 +7,7 @@ namespace Tool1_BestandSchrijven
 {
     /*Bevat alle lezers voor bestanden die informatie over straten bevat:
        * WRstraatnamen.csv, WRdata.csv*/
-    public class GegevensLezer_segmenten
+    class GegevensLezer_segmenten
     {
         public static Dictionary<int, string> LeesStraten()
         {

@@ -63,7 +63,7 @@ namespace Tool3_DatabankBevragen
                     db.GeefProvincieoverzicht(provincie);
                     break;
                 case 6:
-                    Console.WriteLine("Geef een straaiID: ");
+                    Console.WriteLine("Geef een straatID: ");
                     int strId = int.Parse(Console.ReadLine());
                     List<string> aangrenzendeStraten = db.GeefAangrenzendeStraten(strId);
                     foreach (string straat in aangrenzendeStraten)

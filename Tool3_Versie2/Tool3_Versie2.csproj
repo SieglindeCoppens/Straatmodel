@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Gegevenslezer\" />
-    <Folder Include="IDgenerators\" />
-    <Folder Include="Straatklassen\" />
-    <Folder Include="Stratenmaker\" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
 </Project>

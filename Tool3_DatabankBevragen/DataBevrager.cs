@@ -433,7 +433,6 @@ namespace Tool3_DatabankBevragen
                     connection.Close();
                 }
             }
-            //Ik had ook kunnen sorteren in mijn sql query, maar wou hier eens LINQ gebruiken 
 
             gemeenten.Sort();
             return gemeenten;

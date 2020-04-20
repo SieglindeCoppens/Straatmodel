@@ -52,10 +52,9 @@
   <Class Name="Tool1_BestandSchrijven.Straat">
     <Position X="0.5" Y="6" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIRABAABAABAAgAAAAABAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAIBABAABAABAAAAAAAABAAAAAAAAAAI=</HashCode>
       <FileName>Straat.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Tool1_BestandSchrijven.Segment">
     <Position X="3.5" Y="3" Width="5.5" />

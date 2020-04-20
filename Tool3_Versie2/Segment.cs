@@ -20,7 +20,6 @@ namespace Tool3_Versie2
         }
 
 
-
         public override bool Equals(object obj)
         {
             if (obj is Segment)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    class Straat : IComparable, IComparable<Straat>
+    class Straat
     {
         public Graaf Graaf { get; set; }
         public int StraatID { get; set; }
@@ -67,21 +67,6 @@ namespace Tool1_BestandSchrijven
         {
             Console.WriteLine("\n**************************************************************************************************");
             Console.WriteLine($"{StraatID} : {Straatnaam} met lengte {Lengte}m");
-        }
-
-        int IComparable.CompareTo(object Straat)
-        {
-            if (Straat is Straat)
-                return CompareTo(Straat as Straat);
-            else
-                throw new ArgumentException($"Object must be of type {nameof(Straat)}.");
-        }
-        public int CompareTo(Straat straat)
-        {
-            if (!ReferenceEquals(straat, null))
-                return Lengte.CompareTo(straat.Lengte);
-            else
-                return +1;
         }
     }
 }

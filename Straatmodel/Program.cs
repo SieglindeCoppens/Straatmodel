@@ -26,10 +26,10 @@ namespace Tool1_BestandSchrijven
             Dictionary<string, Dictionary<string, List<Straat>>> provincies = DictionaryOpvuller.geefStratenDictionary(straten, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
 
             //Rapport uitprinten
-            SchrijfRapport.PrintRapport(provincies);
+            //SchrijfRapport.PrintRapport(provincies);
 
             //Bestanden uitprinten 
-            //SchrijfBestand.PrintDocumenten(provincies);
+            SchrijfBestand.PrintDocumenten(provincies);
         }
     }
 }

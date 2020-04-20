@@ -21,7 +21,7 @@ namespace Tool2_ImporteerInDatabank
             {
                 string input = null;
                 sr.ReadLine();
-                while((input = sr.ReadLine()) != null)
+                while ((input = sr.ReadLine()) != null)
                 {
                     string[] inputs = input.Split(';');
                     straatIds.Add(inputs[0]);
@@ -49,7 +49,6 @@ namespace Tool2_ImporteerInDatabank
             List<string> beginknoopIds = new List<string>();
             List<string> eindknoopIds = new List<string>();
             List<string> straatIds = new List<string>();
-            List<string> puntenlijsten = new List<string>();
 
             using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt"))
             {
@@ -62,14 +61,12 @@ namespace Tool2_ImporteerInDatabank
                     beginknoopIds.Add(inputs[1]);
                     eindknoopIds.Add(inputs[2]);
                     straatIds.Add(inputs[3]);
-                    puntenlijsten.Add(inputs[4]);
                 }
             }
             segmentInfo.Add(segmentIds);
             segmentInfo.Add(beginknoopIds);
             segmentInfo.Add(eindknoopIds);
             segmentInfo.Add(straatIds);
-            segmentInfo.Add(puntenlijsten);
 
             return segmentInfo;
         }
@@ -99,6 +96,36 @@ namespace Tool2_ImporteerInDatabank
             knoopInfo.Add(ys);
 
             return knoopInfo;
+        }
+
+        public static List<List<string>> LeesPunten()
+        {
+            List<List<string>> puntInfo = new List<List<string>>();
+            List<string> xs = new List<string>();
+            List<string> ys = new List<string>();
+            List<string> segmentIds = new List<string>();
+            List<string> posities = new List<string>();
+
+            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\punten.txt"))
+            {
+                string input = null;
+                sr.ReadLine();
+                while ((input = sr.ReadLine()) != null)
+                {
+                    string[] inputs = input.Split(';');
+                    xs.Add(inputs[0]);
+                    ys.Add(inputs[1]);
+                    segmentIds.Add(inputs[2]);
+                    posities.Add(inputs[3]);
+                }
+            }
+            puntInfo.Add(xs);
+            puntInfo.Add(ys);
+            puntInfo.Add(segmentIds);
+            puntInfo.Add(posities);
+
+            return puntInfo;
+
         }
     }
 }

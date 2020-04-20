@@ -28,9 +28,6 @@ namespace Tool2_ImporteerInDatabank
             using (SqlCommand command = connection.CreateCommand())
             {
                 connection.Open();
-                //foreach uit try of in try? 
-                
-                
                     try
                     {
                         command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
@@ -70,7 +67,7 @@ namespace Tool2_ImporteerInDatabank
         {
             SqlConnection connection = getConnection();
             string query = "INSERT INTO dbo.segment(id, beginknoop, eindknoop, straatId) VALUES(@id, @beginknoop, @eindknoop, @straatId)";
-            string query2 = "INSERT INTO dbo.punt(x, y, segmentId, positie) VALUES(@x, @y, @segmentId, @positie)";
+            //string query2 = "INSERT INTO dbo.punt(x, y, segmentId, positie) VALUES(@x, @y, @segmentId, @positie)";
             using (SqlCommand command = connection.CreateCommand())
             using( SqlCommand command2 = connection.CreateCommand())
             {
@@ -86,14 +83,6 @@ namespace Tool2_ImporteerInDatabank
                     command.Parameters.Add(new SqlParameter("@straatId", SqlDbType.Int));
                     command.CommandText = query;
 
-                    //Invoegen in punt
-                    command2.Parameters.Add(new SqlParameter("@x", SqlDbType.NVarChar));
-                    command2.Parameters.Add(new SqlParameter("@y", SqlDbType.NVarChar));
-                    command2.Parameters.Add(new SqlParameter("@segmentId", SqlDbType.Int));
-                    command2.Parameters.Add(new SqlParameter("@positie", SqlDbType.Int));
-                    command2.CommandText = query2;
-
-
                     for (int i = 0; i < segmentInfo[0].Count; i++)
                     {
                         //segment
@@ -102,24 +91,6 @@ namespace Tool2_ImporteerInDatabank
                         command.Parameters["@eindknoop"].Value = int.Parse(segmentInfo[2][i]);
                         command.Parameters["@straatId"].Value = int.Parse(segmentInfo[3][i]);
                         command.ExecuteNonQuery();
-
-                        //punt
-                        command2.Parameters["@segmentId"].Value = int.Parse(segmentInfo[0][i]);
-
-                        if (!(segmentInfo[4][i].Trim(' ') == ""))
-                        {
-                            string[] punten = segmentInfo[4][i].Split(',');
-                            for (int x = 0; x < punten.Length; x++)
-                            {
-                                string[] xy = punten[x].Split(" ");
-                                command2.Parameters["@x"].Value = xy[0];
-                                command2.Parameters["@y"].Value = xy[1];
-                                //volgorde van de punten behouden? Voor moest je nog berekening van lengte willen doen (ookal geef ik de lengte gewoon ook door)
-                                command2.Parameters["@positie"].Value = x+1;
-                                command2.ExecuteNonQuery();
-                            }
-                        }
-                       
                     }
 
                 }
@@ -142,9 +113,6 @@ namespace Tool2_ImporteerInDatabank
             using (SqlCommand command = connection.CreateCommand())
             {
                 connection.Open();
-                //foreach uit try of in try? 
-
-
                 try
                 {
                     command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
@@ -173,6 +141,45 @@ namespace Tool2_ImporteerInDatabank
                 }
 
             }
+        }
+
+        public void voegPuntenToe(List<List<string>> puntInfo)
+        {
+            SqlConnection connection = getConnection();
+            string query = "INSERT INTO dbo.punt(x, y, segmentId, positie) VALUES(@x, @y, @segmentId, @positie)";
+
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@x", SqlDbType.NVarChar));
+                    command.Parameters.Add(new SqlParameter("@y", SqlDbType.NVarChar));
+                    command.Parameters.Add(new SqlParameter("@segmentId", SqlDbType.Int));
+                    command.Parameters.Add(new SqlParameter("@positie", SqlDbType.Int));
+                    command.CommandText = query;
+
+                    for (int i = 0; i < puntInfo[0].Count; i++)
+                    {
+                        command.Parameters["@x"].Value = puntInfo[0][i];
+                        command.Parameters["@y"].Value = puntInfo[1][i];
+                        command.Parameters["@segmentId"].Value = puntInfo[2][i];
+                        command.Parameters["@positie"].Value = puntInfo[3][i];
+
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
         }
     }
 }

@@ -21,10 +21,7 @@ namespace Tool1_BestandSchrijven
             int teller = 0;
             foreach (KeyValuePair<string, List<Straat>> gemeente in provincie)
             {
-                foreach (Straat straat in gemeente.Value)
-                {
-                    teller++;
-                }
+                teller+= gemeente.Value.Count;
             }
             return teller;
         }

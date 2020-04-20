@@ -17,7 +17,6 @@ namespace Tool1_BestandSchrijven
             StratenFactory sf = new StratenFactory();
             List<Straat> straten = sf.MaakStraten(straatnaamIDStraatnaam, straatnaamIDSegmentlijst);
 
-
             //Lees de bestanden in van gemeentes/provincies
             Dictionary<string, string> gemeenteIDProvincie = GegevensLezer_adressen.LeesProvincies();
             Dictionary<string, string> gemeentes = GegevensLezer_adressen.LeesGemeentes();
@@ -30,7 +29,7 @@ namespace Tool1_BestandSchrijven
             SchrijfRapport.PrintRapport(provincies);
 
             //Bestanden uitprinten 
-            SchrijfBestand.PrintDocumenten(provincies);
+            //SchrijfBestand.PrintDocumenten(provincies);
         }
     }
 }

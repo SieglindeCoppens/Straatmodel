@@ -9,8 +9,6 @@ namespace Tool1_BestandSchrijven
 {
     class SchrijfRapport
     {
-        //Telstraten kan ik ook in main aanroepen en dan doorgeven? Is dit nuttig? 
-        //kan ik best alles berekenen apart en dan in een dictionary zetten en die doorgeven aan PrintRapport?
         public static void PrintRapport(Dictionary<string, Dictionary<string, List<Straat>>> provincies)
         {
             if (File.Exists(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Rapport.txt"))
@@ -20,47 +18,36 @@ namespace Tool1_BestandSchrijven
 
             using StreamWriter writer = File.CreateText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Rapport.txt");
             writer.WriteLine($"Totaal aantal straten: {Stratenteller.TelStraten(provincies)}\n");
-
             writer.WriteLine("Aantal straten per provincie:");
-            foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
+
+            //De provincies ordenen op alfabetische volgorde
+            var alfabetischeProvincies = provincies.OrderBy(p => p.Key);
+            foreach(var provincie in alfabetischeProvincies)
             {
                 writer.WriteLine($"   -  {provincie.Key} : {Stratenteller.TelStraten(provincie.Value)}");
             }
 
-            foreach (KeyValuePair<string, Dictionary<string, List<Straat>>> provincie in provincies)
+            foreach (var provincie in alfabetischeProvincies)
             {
                 writer.WriteLine($"\n Straatinfo {provincie.Key}");
 
-                foreach (KeyValuePair<string, List<Straat>> gemeente in provincie.Value)
+                //Gemeentes ordenen op alfabetische volgorde
+                var gesorteerdegemeentes = provincie.Value.OrderBy(g => g.Key);
+                foreach (var gemeente in gesorteerdegemeentes)
                 {
                     List<Straat> straten = gemeente.Value;
-                    double totaleLengte = 0;
-                    foreach (Straat straat in straten)
-                    {
-                        totaleLengte += straat.Lengte;
-                    }
 
+                    //Totale lengte berekenen met linq
+                    double totaleLengte = straten.Sum(s => s.Lengte);
                     writer.WriteLine($"   -  {gemeente.Key} : {gemeente.Value.Count}, {totaleLengte}");
-                    //var gesorteerdestraten = from Straat straat in gemeente.Value
-                    //                         orderby straat.Lengte
-                    //                         select straat;
 
-
-                    straten.Sort();
-                    //kon ook met LINQ
-                    Straat kortste = straten[0];
-                    Straat langste = straten[straten.Count - 1];
-
+                    var gesorteerdestraten = straten.OrderBy(s => s.Lengte);
+                    Straat kortste = gesorteerdestraten.First();
+                    Straat langste = gesorteerdestraten.Last();
                     writer.WriteLine($"         o  {kortste.StraatID}, {kortste.Straatnaam}, {kortste.Lengte}");
                     writer.WriteLine($"         o  {langste.StraatID}, {langste.Straatnaam}, {langste.Lengte}");
-
                 }
-
             }
-
-
-
-
         }
     }
 }

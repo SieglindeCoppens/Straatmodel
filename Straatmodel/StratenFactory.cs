@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tool1_BestandSchrijven.Stratenmaker;
 
 namespace Tool1_BestandSchrijven
 {

@@ -49,6 +49,7 @@ namespace Tool1_BestandSchrijven
             return stratenGemeentes;
         }
 
+        //Geeft een dictionary terug van de 
         public static Dictionary<string, string> LeesProvincies()
         {
             List<string> vlaamseProv = LeesVlaamseProvincieIDs();

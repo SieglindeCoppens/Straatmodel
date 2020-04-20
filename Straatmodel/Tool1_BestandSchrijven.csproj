@@ -6,10 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Gegevenslezer\" />
-    <Folder Include="IDgenerators\" />
-    <Folder Include="Straatklassen\" />
-    <Folder Include="Stratenmaker\" />
+    <Compile Remove="Gegevenslezer\**" />
+    <Compile Remove="IDgenerators\**" />
+    <Compile Remove="Straatklassen\**" />
+    <Compile Remove="Stratenmaker\**" />
+    <EmbeddedResource Remove="Gegevenslezer\**" />
+    <EmbeddedResource Remove="IDgenerators\**" />
+    <EmbeddedResource Remove="Straatklassen\**" />
+    <EmbeddedResource Remove="Stratenmaker\**" />
+    <None Remove="Gegevenslezer\**" />
+    <None Remove="IDgenerators\**" />
+    <None Remove="Straatklassen\**" />
+    <None Remove="Stratenmaker\**" />
   </ItemGroup>
 
 </Project>

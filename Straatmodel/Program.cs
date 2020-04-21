@@ -18,7 +18,7 @@ namespace Tool1_BestandSchrijven
             Dictionary<string, string> gemeentes = GegevensLezer_adressen.LeesGemeentes();
             Dictionary<string, string> stratenIDgemeentesID = GegevensLezer_adressen.LeesLink();
 
-            Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> provincies = DictionaryOpvuller.geefStratenDictionary(straatnaamIDSegmentlijst, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID, straatnaamIDStraatnaam);
+            Dictionary<string, Dictionary<string, Dictionary<string, List<Segment>>>> provincies = DictionaryOpvuller.geefStratenDictionary(straatnaamIDSegmentlijst, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID, straatnaamIDStraatnaam);
 
             StratenFactory sf = new StratenFactory();
             List<Straat> straten = sf.MaakStraten(provincies);

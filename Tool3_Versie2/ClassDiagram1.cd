@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Tool3_Versie2.DataBevrager">
+    <Position X="1.5" Y="1" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>ESEAgAAAAAAAAAgAAAAAAAAAAABAAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>Databevrager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool3_Versie2.Graaf">
+    <Position X="11.25" Y="7" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACABAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool3_Versie2.Straat">
+    <Position X="4" Y="6.5" Width="6.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAIFABAAAAABACAAAAAABAAAAAAAACAA=</HashCode>
+      <FileName>Straat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool3_Versie2.Segment">
+    <Position X="10.25" Y="3.25" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAIAAAAAAAEgAAAAAAAAAAAAIAAEAAAAAAgAAA=</HashCode>
+      <FileName>Segment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool3_Versie2.Punt">
+    <Position X="8" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAYAA=</HashCode>
+      <FileName>Punt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool3_Versie2.Knoop">
+    <Position X="6.5" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAEgAAAAAAQAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Knoop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

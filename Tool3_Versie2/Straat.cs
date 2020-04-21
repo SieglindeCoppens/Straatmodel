@@ -26,18 +26,32 @@ namespace Tool3_Versie2
 
         }
 
-        public List<Knoop> getKnopen()
+        public List<Knoop> GetKnopen()
         {
             return Graaf.GetKnopen();
+        }
+
+        public List<Segment> GetSegmenten()
+        {
+            List<Segment> segmenten = new List<Segment>();
+            foreach(KeyValuePair<Knoop, List<Segment>> knoopmap in Graaf.Map)
+            {
+                foreach(Segment segment in knoopmap.Value)
+                {
+                    if (!segmenten.Contains(segment))
+                        segmenten.Add(segment);
+                }
+            }
+            return segmenten;
         }
 
         public void showStraat()
         {
             Console.WriteLine($"{StraatID},{Straatnaam},{Gemeente},{Provincie}");
             Console.WriteLine($"Graaf: {Graaf.GraafID} ");
-            Console.WriteLine($"Aantal knopen : {getKnopen().Count}");
-            Console.WriteLine($"Aantal wegsegmenten: ");
-
+            Console.WriteLine($"Aantal knopen : {GetKnopen().Count}");
+            Console.WriteLine($"Aantal wegsegmenten: {GetSegmenten().Count}");
+            Graaf.ShowGraaf();
         }
     }
 }

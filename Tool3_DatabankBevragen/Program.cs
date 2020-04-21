@@ -9,6 +9,8 @@ namespace Tool3_DatabankBevragen
         {
             DataBevrager db = new DataBevrager("Data Source=DESKTOP-HT91N8R\\SQLEXPRESS;Initial Catalog=db_Wegennet;Integrated Security=True");
 
+            db.GeefStraatinfo("gent", "goudenregenstraat");
+
             Console.WriteLine("Wat wenst u te doen (Typ het nummer)?");
             Console.WriteLine("1. Lijst van straatID's van een gemeente opvragen");
             Console.WriteLine("2. Straatinfo opvragen via een straatID");

@@ -26,7 +26,7 @@ namespace Tool3_Versie2
                     case 1:
                     Console.WriteLine("Van welke gemeente wenst u de straatID's op te vragen?");
                     string gemeente = Console.ReadLine().ToLower();
-                    IEnumerable<int> straatIDs = db.GeefStraatIDs(gemeente);
+                    List<int> straatIDs = db.GeefStraatIDs(gemeente);
                     foreach (int straatID in straatIDs)
                     {
                         Console.WriteLine(straatID);
@@ -37,7 +37,6 @@ namespace Tool3_Versie2
                     int straatId = int.Parse(Console.ReadLine());
                     Straat straat = db.MaakStraat(straatId);
                     straat.showStraat();
-
                     break;
                     case 3:
                     Console.WriteLine("Geef de straatnaam:");

@@ -22,10 +22,9 @@ namespace Tool3_Versie2
             return connection;
         }
 
-        //bijhouden! 
-        public IEnumerable<int> GeefStraatIDs(string gemeente)
+        public List<int> GeefStraatIDs(string gemeente)
         {
-            IList<int> straatIDs = new List<int>();
+            List<int> straatIDs = new List<int>();
 
             SqlConnection connection = getConnection();
             string query = "Select * FROM dbo.straat WHERE gemeente = @gemeente";
@@ -103,7 +102,6 @@ namespace Tool3_Versie2
 
         public Straat MaakStraat(string straatnaam, string gemeentenaam)
         {
-            Straat straat = null;
             int straatId = 0;
             SqlConnection connection = getConnection();
             string query = "SELECT id FROM dbo.straat WHERE straatnaam=@straatnaam AND gemeente=@gemeente";
@@ -412,7 +410,7 @@ namespace Tool3_Versie2
             }
             return aangrenzendeStraten;
         }
-        public List<List<string>> GeefKnopenVanStraat(int straatID)
+        private List<List<string>> GeefKnopenVanStraat(int straatID)
         {
             SqlConnection connection = getConnection();
             List<string> knoopIDs = new List<string>();

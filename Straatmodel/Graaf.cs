@@ -34,19 +34,21 @@ namespace Tool1_BestandSchrijven
         
         public void ShowGraaf()
         {
-            Console.WriteLine("\n**************************************************************************************************");
-            Console.WriteLine($"Graaf met ID {this.GraafID} heeft de knopen:");
-            foreach(KeyValuePair<Knoop, List<Segment>> knoopMetSegmenten in this.Map)
+            foreach (KeyValuePair<Knoop, List<Segment>> knoopmap in Map)
             {
-                Console.WriteLine($"Knoop: {knoopMetSegmenten.Key} met segmenten: ");
-
-                foreach(Segment segment in knoopMetSegmenten.Value)
+                Console.WriteLine($"Knoop[{knoopmap.Key.KnoopID},[{knoopmap.Key.Punt.X},{knoopmap.Key.Punt.Y}]]");
+                foreach (Segment segment in knoopmap.Value)
                 {
-                    Console.Write($"-   {segment} \n");
+                    Console.WriteLine($"     [segment:{segment.SegmentID},begin{segment.BeginKnoop.KnoopID},eind{segment.EindKnoop.KnoopID}]");
+                    Console.WriteLine($"            ({segment.BeginKnoop.Punt.X},{segment.BeginKnoop.Punt.Y})");
+                    foreach (Punt punt in segment.Vertices)
+                    {
+                        Console.WriteLine($"            ({punt.X},{punt.Y})");
+                    }
+                    Console.WriteLine($"            ({segment.EindKnoop.Punt.X},{segment.EindKnoop.Punt.Y})");
                 }
-     
             }
-           
+
         }
 
         public List<Knoop> GetKnopen()

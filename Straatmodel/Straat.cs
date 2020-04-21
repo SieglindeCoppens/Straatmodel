@@ -60,17 +60,32 @@ namespace Tool1_BestandSchrijven
             return Math.Round(totaleLengte,4);
         }
 
-        public List<Knoop> getKnopen() 
+        public List<Knoop> GetKnopen() 
         {
             return Graaf.GetKnopen();
         }
 
+        public List<Segment> GetSegmenten()
+        {
+            List<Segment> segmenten = new List<Segment>();
+            foreach (KeyValuePair<Knoop, List<Segment>> knoopmap in Graaf.Map)
+            {
+                foreach (Segment segment in knoopmap.Value)
+                {
+                    if (!segmenten.Contains(segment))
+                        segmenten.Add(segment);
+                }
+            }
+            return segmenten;
+        }
 
-        //NOG TE IMPLEMENTEREN!
         public void showStraat()
         {
-            Console.WriteLine("\n**************************************************************************************************");
-            Console.WriteLine($"{StraatID} : {Straatnaam} met lengte {Lengte}m");
+            Console.WriteLine($"{StraatID},{Straatnaam},{Gemeente},{Provincie}");
+            Console.WriteLine($"Graaf: {Graaf.GraafID} ");
+            Console.WriteLine($"Aantal knopen : {GetKnopen().Count}");
+            Console.WriteLine($"Aantal wegsegmenten: {GetSegmenten().Count}");
+            Graaf.ShowGraaf();
         }
     }
 }

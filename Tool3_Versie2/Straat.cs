@@ -33,8 +33,9 @@ namespace Tool3_Versie2
 
         public void showStraat()
         {
-            Console.WriteLine("\n**************************************************************************************************");
-            Console.WriteLine($"{StraatID} : {Straatnaam} met lengte {Lengte}m");
+            Console.WriteLine($"{StraatID},{Straatnaam},{Gemeente},{Provincie}");
+            Console.WriteLine($"{Graaf} : ");
+
         }
     }
 }

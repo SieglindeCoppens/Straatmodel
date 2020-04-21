@@ -12,11 +12,17 @@ namespace Tool1_BestandSchrijven
 
         public double Lengte { get; set; }
 
-        public Straat(int straatID, string straatnaam, Graaf graaf)
+        public string Provincie { get; set; }
+
+        public string Gemeente { get; set; }
+
+        public Straat(string straatnaam, Graaf graaf, string provincie, string gemeente)
         {
-            StraatID = straatID;
+            StraatID = IDGenerator.CreateStraatID();
             Straatnaam = straatnaam;
             Graaf = graaf;
+            Gemeente = gemeente;
+            Provincie = provincie;
             Lengte = this.BerekenLengte();
 
         }

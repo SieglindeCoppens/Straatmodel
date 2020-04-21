@@ -67,13 +67,9 @@ namespace Tool2_ImporteerInDatabank
         {
             SqlConnection connection = getConnection();
             string query = "INSERT INTO dbo.segment(id, beginknoop, eindknoop, straatId) VALUES(@id, @beginknoop, @eindknoop, @straatId)";
-            //string query2 = "INSERT INTO dbo.punt(x, y, segmentId, positie) VALUES(@x, @y, @segmentId, @positie)";
             using (SqlCommand command = connection.CreateCommand())
-            using( SqlCommand command2 = connection.CreateCommand())
             {
                 connection.Open();
-                //foreach uit try of in try? 
-
                 try
                 {
                     //Invoegen in segment

@@ -13,23 +13,21 @@ namespace Tool1_BestandSchrijven
             Dictionary<int, string> straatnaamIDStraatnaam = GegevensLezer_segmenten.LeesStraten();
             Dictionary<int, List<Segment>> straatnaamIDSegmentlijst = GegevensLezer_segmenten.LeesSegmenten();
 
-            //We maken met deze gegevens een lijst van Straat objecten aan, hierin zitten ook nog de straten in niet-Vlaanderen
-            StratenFactory sf = new StratenFactory();
-            List<Straat> straten = sf.MaakStraten(straatnaamIDStraatnaam, straatnaamIDSegmentlijst);
-
             //Lees de bestanden in van gemeentes/provincies
             Dictionary<string, string> gemeenteIDProvincie = GegevensLezer_adressen.LeesProvincies();
             Dictionary<string, string> gemeentes = GegevensLezer_adressen.LeesGemeentes();
             Dictionary<string, string> stratenIDgemeentesID = GegevensLezer_adressen.LeesLink();
 
-            //Vul een dictionary op met gecombineerde gegevens provincies, gemeentes,straten 
-            Dictionary<string, Dictionary<string, List<Straat>>> provincies = DictionaryOpvuller.geefStratenDictionary(straten, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
+            Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> provincies = DictionaryOpvuller.geefStratenDictionary(straatnaamIDSegmentlijst, gemeenteIDProvincie, gemeentes, stratenIDgemeentesID);
+
+            StratenFactory sf = new StratenFactory();
+            List<Straat> straten = sf.MaakStraten(provincies, straatnaamIDStraatnaam);
 
             //Rapport uitprinten
-            //SchrijfRapport.PrintRapport(provincies);
+            //SchrijfRapport.PrintRapport(straten);
 
-            //Bestanden uitprinten 
-            SchrijfBestand.PrintDocumenten(provincies);
+            ////Bestanden uitprinten 
+            SchrijfBestand.PrintDocumenten(straten);
         }
     }
 }

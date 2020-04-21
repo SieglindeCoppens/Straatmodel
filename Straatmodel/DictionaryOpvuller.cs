@@ -4,54 +4,42 @@ using System.Text;
 
 namespace Tool1_BestandSchrijven
 {
-    /*Overloopt alle straten en vult zo een Dictionary met vorm <provincienaam, <gemeentenaam, List<Straat>>> op*/
     class DictionaryOpvuller
     {
-        public static Dictionary<string, Dictionary<string, List<Straat>>> geefStratenDictionary(List<Straat> straten, Dictionary<string, string> gemeenteIDProvincie, Dictionary<string, string> gemeentes, Dictionary<string, string> stratenIDgemeentesID)
+        public static Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> geefStratenDictionary(Dictionary<int,List<Segment>> straatnaamIdSegmentlijst, Dictionary<string, string> gemeenteIDProvincie, Dictionary<string, string> gemeentes, Dictionary<string, string> stratenIDgemeentesID)
         {
-            Dictionary<string, Dictionary<string, List<Straat>>> provincies = new Dictionary<string, Dictionary<string, List<Straat>>>();
+            Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> provincies = new Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>>();
 
 
-            //Dictionary opvullen met gemeentenamen als key en een lijst van straten als value
-            Dictionary<string, List<Straat>> gemeentesMetStraten = new Dictionary<string, List<Straat>>();
+            //Dictionary opvullen met gemeentenamen als key en een dictionary van straatnaamIdsegmentlijst als value
+            //Dictionary<string, Dictionary<int, List<Segment>>> gemeentesMetStraatDict = new Dictionary<string, Dictionary<int, List<Segment>>>();
 
-            foreach(Straat straat in straten)
+            foreach(KeyValuePair<int, List<Segment>> straat in straatnaamIdSegmentlijst)
             {
-                //In ons datamodel is de ID een int, maar in de dictionary een string! 
-                string straatID = $"{straat.StraatID}";
-
-                //StraatID 114812 werd niet gevonden?? Dus hier een if ingesteld als het ID niet in de lijst zit. 
-                if (stratenIDgemeentesID.ContainsKey(straatID))
+                string straatId = straat.Key.ToString();
+                if (stratenIDgemeentesID.ContainsKey(straatId))
                 {
-                    string gemeenteID = stratenIDgemeentesID[straatID];
-                   
-                    if (gemeenteIDProvincie.ContainsKey(gemeenteID)){
+                    string gemeenteID = stratenIDgemeentesID[straatId];
+                    if (gemeenteIDProvincie.ContainsKey(gemeenteID))
+                    {
                         string gemeenteNaam = gemeentes[gemeenteID];
                         string provincie = gemeenteIDProvincie[gemeenteID];
 
                         if (!provincies.ContainsKey(provincie))
                         {
-                            Dictionary<string, List<Straat>> gemeente = new Dictionary<string, List<Straat>>();
+                            Dictionary<string, Dictionary<int, List<Segment>>> gemeente = new Dictionary<string, Dictionary<int, List<Segment>>>();
                             provincies.Add(provincie, gemeente);
                         }
                         if (!provincies[provincie].ContainsKey(gemeenteNaam))
                         {
-                            List<Straat> stratenInGemeente = new List<Straat>();
-                            provincies[provincie].Add(gemeenteNaam, stratenInGemeente);
+                            Dictionary<int, List<Segment>> straatnaamIdSegmenten = new Dictionary<int, List<Segment>>();
+                            provincies[provincie].Add(gemeenteNaam, straatnaamIdSegmenten);
                         }
-                        provincies[provincie][gemeenteNaam].Add(straat);
-                    }     
-                }
+                        provincies[provincie][gemeenteNaam].Add(straat.Key,straat.Value);
+                    }
+                }   
             }
             return provincies;
-
         }
-
-
-
-
-
-
-
     }
 }

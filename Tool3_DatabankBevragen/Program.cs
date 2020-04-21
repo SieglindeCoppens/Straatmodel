@@ -7,9 +7,6 @@ namespace Tool3_DatabankBevragen
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
-
             DataBevrager db = new DataBevrager("Data Source=DESKTOP-HT91N8R\\SQLEXPRESS;Initial Catalog=db_Wegennet;Integrated Security=True");
 
             Console.WriteLine("Wat wenst u te doen (Typ het nummer)?");
@@ -24,12 +21,11 @@ namespace Tool3_DatabankBevragen
 
             switch (keuze)
             {
-                //Alles laten printen naar de console in de aparte klassen? 
                 case 1:
                     Console.WriteLine("Van welke gemeente wenst u de straatID's op te vragen?");
                     string gemeente = Console.ReadLine().ToLower();
                     IEnumerable<int> straatIDs = db.GeefStraatIDs(gemeente);
-                    foreach(int straatID in straatIDs)
+                    foreach (int straatID in straatIDs)
                     {
                         Console.WriteLine(straatID);
                     }
@@ -52,7 +48,7 @@ namespace Tool3_DatabankBevragen
                     Console.WriteLine("Geef de gemeentenaam:");
                     string gemeentenaam2 = Console.ReadLine();
                     List<string> straatnamen = db.GeefStraatnamenVanGemeente(gemeentenaam2);
-                    foreach(string straatnaam2 in straatnamen)
+                    foreach (string straatnaam2 in straatnamen)
                     {
                         Console.WriteLine(straatnaam2);
                     }

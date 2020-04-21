@@ -9,10 +9,10 @@ namespace Tool3_Versie2
         public int GraafID { get; set; }
         public Dictionary<Knoop, List<Segment>> Map { get; set; }
 
-        public Graaf(List<Segment> segmentLijst)
+        public Graaf(List<Segment> segmentLijst, int graafId)
         {
             Map = new Dictionary<Knoop, List<Segment>>();
-            //GraafID = IDGenerator.CreateGraafID();
+            GraafID = graafId;
 
             //Map van de graaf vullen met de knopen van de segmenten van de straat die je hebt!
 

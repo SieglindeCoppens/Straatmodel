@@ -9,7 +9,7 @@ namespace Tool1_BestandSchrijven
 {
     class SchrijfRapport
     {
-        public static void PrintRapport(Dictionary<string, Dictionary<string, List<Straat>>> provincies)
+        public static void PrintRapport(List<Straat> straten)
         {
             if (File.Exists(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Rapport.txt"))
             {
@@ -17,36 +17,39 @@ namespace Tool1_BestandSchrijven
             }
 
             using StreamWriter writer = File.CreateText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Rapport.txt");
-            writer.WriteLine($"Totaal aantal straten: {Stratenteller.TelStraten(provincies)}\n");
+            writer.WriteLine($"Totaal aantal straten: {straten.Count()}\n");
             writer.WriteLine("Aantal straten per provincie:");
 
-            //De provincies ordenen op alfabetische volgorde
-            var alfabetischeProvincies = provincies.OrderBy(p => p.Key);
-            foreach(var provincie in alfabetischeProvincies)
+            //Straten ordenen op alfabetische volgorde van de provincies, dan op 
+            var geordendestraten = straten.OrderBy(s => s.Provincie).ThenBy(s => s.Gemeente).ThenBy(s => s.Straatnaam);
+            
+            //Aantal straten per provincie tellen
+            var provincies = geordendestraten.Select(s => s.Provincie).Distinct();
+            foreach(var provincie in provincies)
             {
-                writer.WriteLine($"   -  {provincie.Key} : {Stratenteller.TelStraten(provincie.Value)}");
+                writer.WriteLine($"   -  {provincie} : {geordendestraten.Count(s=>s.Provincie==provincie)}");
             }
+            //ER KUNNEN VERSCHILLENDE STEDEN ZIJN MET DEZELFDE NAAM, MAAR IN EEN ANDERE PROVINCIE!!
 
-            foreach (var provincie in alfabetischeProvincies)
+            foreach(var provincie in provincies)
             {
-                writer.WriteLine($"\n Straatinfo {provincie.Key}");
-
-                //Gemeentes ordenen op alfabetische volgorde
-                var gesorteerdegemeentes = provincie.Value.OrderBy(g => g.Key);
-                foreach (var gemeente in gesorteerdegemeentes)
+                writer.WriteLine($"\n Straatinfo {provincie}");
+                var gemeenten = geordendestraten.Where(s => s.Provincie == provincie).Select(s => s.Gemeente).Distinct();
+                foreach(var gemeente in gemeenten)
                 {
-                    List<Straat> straten = gemeente.Value;
+                    var stratenVanGemeente = geordendestraten.Where(s => (s.Gemeente == gemeente) && (s.Provincie == provincie));
 
-                    //Totale lengte berekenen met linq
-                    double totaleLengte = straten.Sum(s => s.Lengte);
-                    writer.WriteLine($"   -  {gemeente.Key} : {gemeente.Value.Count}, {totaleLengte}");
+                    int aantalStraten = stratenVanGemeente.Count();
+                    double totaleLengte = stratenVanGemeente.Sum(s => s.Lengte);
+                    writer.WriteLine($"   -  {gemeente} : {aantalStraten}, {totaleLengte}");
 
-                    var gesorteerdestraten = straten.OrderBy(s => s.Lengte);
+                    var gesorteerdestraten = stratenVanGemeente.OrderBy(s => s.Lengte);
                     Straat kortste = gesorteerdestraten.First();
                     Straat langste = gesorteerdestraten.Last();
                     writer.WriteLine($"         o  {kortste.StraatID}, {kortste.Straatnaam}, {kortste.Lengte}");
                     writer.WriteLine($"         o  {langste.StraatID}, {langste.Straatnaam}, {langste.Lengte}");
                 }
+
             }
         }
     }

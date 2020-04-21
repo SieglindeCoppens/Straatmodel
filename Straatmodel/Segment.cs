@@ -18,9 +18,6 @@ namespace Tool1_BestandSchrijven
             EindKnoop = eindKnoop;
             Vertices = vertices;
         }
-
-
-
         public override bool Equals(object obj)
         {
             if (obj is Segment)

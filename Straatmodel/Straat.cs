@@ -24,9 +24,7 @@ namespace Tool1_BestandSchrijven
             Gemeente = gemeente;
             Provincie = provincie;
             Lengte = this.BerekenLengte();
-
         }
-
         private double BerekenLengte()
         {
             //Dit doen we door de afstanden tussen de vertices van elk van de segmenten te berekenen

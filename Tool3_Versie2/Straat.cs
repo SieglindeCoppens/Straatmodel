@@ -34,7 +34,9 @@ namespace Tool3_Versie2
         public void showStraat()
         {
             Console.WriteLine($"{StraatID},{Straatnaam},{Gemeente},{Provincie}");
-            Console.WriteLine($"{Graaf} : ");
+            Console.WriteLine($"Graaf: {Graaf.GraafID} ");
+            Console.WriteLine($"Aantal knopen : {getKnopen().Count}");
+            Console.WriteLine($"Aantal wegsegmenten: ");
 
         }
     }

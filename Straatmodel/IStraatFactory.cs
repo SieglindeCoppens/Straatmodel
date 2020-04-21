@@ -6,6 +6,6 @@ namespace Tool1_BestandSchrijven
 {
     interface IStraatFactory
     {
-        List<Straat> MaakStraten(Dictionary<int, string> straatnaamIDStraatnaam, Dictionary<int, List<Segment>> straatnaamIDSegmentlijst);
+        List<Straat> MaakStraten(Dictionary<string, Dictionary<string, Dictionary<string, List<Segment>>>> provincies);
     }
 }

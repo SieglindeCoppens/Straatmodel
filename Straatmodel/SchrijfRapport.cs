@@ -30,7 +30,6 @@ namespace Tool1_BestandSchrijven
                 writer.WriteLine($"   -  {provincie} : {geordendestraten.Count(s=>s.Provincie==provincie)}");
             }
             //ER KUNNEN VERSCHILLENDE STEDEN ZIJN MET DEZELFDE NAAM, MAAR IN EEN ANDERE PROVINCIE!!
-
             foreach(var provincie in provincies)
             {
                 writer.WriteLine($"\n Straatinfo {provincie}");

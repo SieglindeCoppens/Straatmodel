@@ -6,13 +6,9 @@ namespace Tool1_BestandSchrijven
 {
     class DictionaryOpvuller
     {
-        public static Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> geefStratenDictionary(Dictionary<int,List<Segment>> straatnaamIdSegmentlijst, Dictionary<string, string> gemeenteIDProvincie, Dictionary<string, string> gemeentes, Dictionary<string, string> stratenIDgemeentesID)
+        public static Dictionary<string, Dictionary<string, Dictionary<string, List<Segment>>>> geefStratenDictionary(Dictionary<int,List<Segment>> straatnaamIdSegmentlijst, Dictionary<string, string> gemeenteIDProvincie, Dictionary<string, string> gemeentes, Dictionary<string, string> stratenIDgemeentesID, Dictionary<int, string> straatnaamIDStraatnaam)
         {
-            Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>> provincies = new Dictionary<string, Dictionary<string, Dictionary<int, List<Segment>>>>();
-
-
-            //Dictionary opvullen met gemeentenamen als key en een dictionary van straatnaamIdsegmentlijst als value
-            //Dictionary<string, Dictionary<int, List<Segment>>> gemeentesMetStraatDict = new Dictionary<string, Dictionary<int, List<Segment>>>();
+            Dictionary<string, Dictionary<string, Dictionary<string, List<Segment>>>> provincies = new Dictionary<string, Dictionary<string, Dictionary<string, List<Segment>>>>();
 
             foreach(KeyValuePair<int, List<Segment>> straat in straatnaamIdSegmentlijst)
             {
@@ -27,15 +23,15 @@ namespace Tool1_BestandSchrijven
 
                         if (!provincies.ContainsKey(provincie))
                         {
-                            Dictionary<string, Dictionary<int, List<Segment>>> gemeente = new Dictionary<string, Dictionary<int, List<Segment>>>();
+                            Dictionary<string, Dictionary<string, List<Segment>>> gemeente = new Dictionary<string, Dictionary<string, List<Segment>>>();
                             provincies.Add(provincie, gemeente);
                         }
                         if (!provincies[provincie].ContainsKey(gemeenteNaam))
                         {
-                            Dictionary<int, List<Segment>> straatnaamIdSegmenten = new Dictionary<int, List<Segment>>();
+                            Dictionary<string, List<Segment>> straatnaamIdSegmenten = new Dictionary<string, List<Segment>>();
                             provincies[provincie].Add(gemeenteNaam, straatnaamIdSegmenten);
                         }
-                        provincies[provincie][gemeenteNaam].Add(straat.Key,straat.Value);
+                        provincies[provincie][gemeenteNaam].Add(straatnaamIDStraatnaam[straat.Key],straat.Value);
                     }
                 }   
             }

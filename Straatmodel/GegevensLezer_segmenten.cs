@@ -9,11 +9,10 @@ namespace Tool1_BestandSchrijven
        * WRstraatnamen.csv, WRdata.csv*/
     class GegevensLezer_segmenten
     {
-        public static Dictionary<int, string> LeesStraten()
+        public static Dictionary<int, string> LeesStraten(string path)
         {
-            Unzipper.UnzipStraten();
             Dictionary<int, string> straatnaamIDStraatnaam = new Dictionary<int, string>();
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\WRstraatnamen.csv"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -27,11 +26,10 @@ namespace Tool1_BestandSchrijven
             return straatnaamIDStraatnaam;
         }
         
-        public static Dictionary<int, List<Segment>> LeesSegmenten()
+        public static Dictionary<int, List<Segment>> LeesSegmenten(string path)
         {
-            Unzipper.UnzipData();
             Dictionary<int, List<Segment>> straatIDSegmentlijst = new Dictionary<int, List<Segment>>();
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\WRdata.csv"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();

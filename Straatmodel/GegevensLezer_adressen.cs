@@ -11,11 +11,11 @@ namespace Tool1_BestandSchrijven
          * WRGemeentenaam.csv, WRGemeenteID.csv, ProvincieInfo.csv, ProvincieIDsVlaanderen.csv*/ 
 
 
-        public static Dictionary<string, string> LeesGemeentes()
+        public static Dictionary<string, string> LeesGemeentes(string path)
         {
             Dictionary<string, string> gemeentes = new Dictionary<string, string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\WRGemeentenaam.csv"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -31,12 +31,12 @@ namespace Tool1_BestandSchrijven
             return gemeentes;
         }
 
-        public static Dictionary<string, string> LeesLink()
+        public static Dictionary<string, string> LeesLink(string path)
         {
             //Geeft een dictionary met key straatID en value gemeenteID
             Dictionary<string, string> stratenGemeentes = new Dictionary<string, string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\WRGemeenteID.csv"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -50,11 +50,11 @@ namespace Tool1_BestandSchrijven
         }
 
         //Geeft een dictionary terug van de 
-        public static Dictionary<string, string> LeesProvincies()
+        public static Dictionary<string, string> LeesProvincies(string path, string path2)
         {
-            List<string> vlaamseProv = LeesVlaamseProvincieIDs();
+            List<string> vlaamseProv = LeesVlaamseProvincieIDs(path2);
             Dictionary<string, string> provincies = new Dictionary<string, string>();
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\ProvincieInfo.csv"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -71,11 +71,11 @@ namespace Tool1_BestandSchrijven
         }
 
         //Deze methode heb ik op private gezet, omdat ze enkel wordt aangeroepen in LeesProvincies. 
-        private static List<string> LeesVlaamseProvincieIDs()
+        private static List<string> LeesVlaamseProvincieIDs(string path2)
         {
             List<string> vlaamseProvincies = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\OneDrive\Documenten\Programmeren\semester2\programmeren 3\Labo\ProvincieIDsVlaanderen.csv"))
+            using (StreamReader sr = File.OpenText(path2))
             {
                 string input = null;
                 while ((input = sr.ReadLine()) != null)

@@ -7,7 +7,7 @@ namespace Tool2_ImporteerInDatabank
 {
     class BestandenLezer
     {
-        public static List<List<string>> LeesStraten()
+        public static List<List<string>> LeesStraten(string path)
         {
             List<List<string>> straatInfo = new List<List<string>>();
             List<string> straatIds = new List<string>();
@@ -17,7 +17,7 @@ namespace Tool2_ImporteerInDatabank
             List<string> graafIds = new List<string>();
             List<string> lengtes = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Straten.txt"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -42,7 +42,7 @@ namespace Tool2_ImporteerInDatabank
             return straatInfo;
         }
 
-        public static List<List<string>> LeesSegmenten()
+        public static List<List<string>> LeesSegmenten(string path)
         {
             List<List<string>> segmentInfo = new List<List<string>>();
             List<string> segmentIds = new List<string>();
@@ -50,7 +50,7 @@ namespace Tool2_ImporteerInDatabank
             List<string> eindknoopIds = new List<string>();
             List<string> straatIds = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Segmenten.txt"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -72,14 +72,14 @@ namespace Tool2_ImporteerInDatabank
         }
 
 
-        public static List<List<string>> LeesKnopen()
+        public static List<List<string>> LeesKnopen(string path)
         {
             List<List<string>> knoopInfo = new List<List<string>>();
             List<string> knoopIds = new List<string>();
             List<string> xs = new List<string>();
             List<string> ys = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\Knopen.txt"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();
@@ -98,7 +98,7 @@ namespace Tool2_ImporteerInDatabank
             return knoopInfo;
         }
 
-        public static List<List<string>> LeesPunten()
+        public static List<List<string>> LeesPunten(string path)
         {
             List<List<string>> puntInfo = new List<List<string>>();
             List<string> xs = new List<string>();
@@ -106,7 +106,7 @@ namespace Tool2_ImporteerInDatabank
             List<string> segmentIds = new List<string>();
             List<string> posities = new List<string>();
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\Sieglinde\Documents\Programmeren\Labo_Straatmodel\punten.txt"))
+            using (StreamReader sr = File.OpenText(path))
             {
                 string input = null;
                 sr.ReadLine();

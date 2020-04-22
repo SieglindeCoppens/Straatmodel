@@ -21,7 +21,7 @@ namespace Tool1_BestandSchrijven
             writer.WriteLine("Aantal straten per provincie:");
 
             //Straten ordenen op alfabetische volgorde van de provincies, dan op 
-            var geordendestraten = straten.OrderBy(s => s.Provincie).ThenBy(s => s.Gemeente).ThenBy(s => s.Straatnaam);
+            var geordendestraten = straten.OrderBy(s => s.Provincie).ThenBy(s => s.Gemeente);
             
             //Aantal straten per provincie tellen
             var provincies = geordendestraten.Select(s => s.Provincie).Distinct();
